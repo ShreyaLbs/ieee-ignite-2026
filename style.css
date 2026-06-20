@@ -16,6 +16,10 @@
   --ink-300: #c4d3e0;
   --ink-500: #8aa2b8;
   --ink-700: #5c7a99;
+  --copper: var(--amber-500);
+  --copper-dim: var(--amber-300);
+  --charcoal: var(--navy-950);
+  --ivory: var(--ink-100);
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -648,108 +652,126 @@ button { font-family: inherit; cursor: pointer; }
 /* =========================================================
    FOOTER — Contact Us (multi-column)
    ========================================================= */
-.footer {
-  padding: 72px 24px 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  position: relative;
+footer {
+  background: var(--charcoal);
+  border-top: 1px solid rgba(245, 166, 35, 0.2);
+  padding: 60px 0 0;
 }
 
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: min(100% - 48px, var(--container));
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(111, 210, 255, 0.3) 20%, rgba(255, 182, 39, 0.3) 80%, transparent);
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-bottom: 48px;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 40px;
-}
-
-.footer-col-title {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--blue-300);
-  margin-bottom: 18px;
-}
-
-/* Column 1: brand + blurb */
 .footer-brand {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--ivory);
+}
+
+.footer-brand span { color: var(--copper); }
+
+.footer-brand-group {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 14px;
+  align-items: center;
+  gap: 16px;
 }
 
-.footer-brand-text {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--ink-100);
+.footer-sb-logo {
+  height: 34px;
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.2s;
 }
 
-.footer-note {
-  color: var(--ink-500);
-  font-size: 0.88rem;
-  max-width: 260px;
-}
+.footer-sb-logo:hover { opacity: 1; }
 
-/* Columns 2-4: lists */
-.footer-links,
-.footer-contact,
-.footer-social {
-  list-style: none;
+.footer-socials {
   display: flex;
-  flex-direction: column;
+  flex-direction: row !important;
+  flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
 }
 
-.footer-link {
-  color: var(--ink-300);
-  font-size: 0.9rem;
-  transition: color 0.2s var(--ease);
-}
-
-.footer-link:hover { color: var(--amber-300); }
-
-.footer-contact li {
+.footer-socials .about-link {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--copper);
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  color: var(--copper);
+  transition: background 0.2s, color 0.2s;
 }
 
-.footer-contact-label {
+.footer-socials .about-link:hover {
+  background: var(--copper);
+  color: var(--charcoal);
+}
+
+.footer-copy {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
+  color: var(--copper-dim);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-700);
 }
 
-.footer-static {
-  color: var(--ink-300);
-  font-size: 0.9rem;
-}
-
-/* Bottom copyright row */
 .footer-bottom {
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(245, 166, 35, 0.1);
+  padding: 20px 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+.footer-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--copper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--copper);
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer-icon:hover {
+  background: var(--copper);
+  color: var(--charcoal);
+}
+
+.footer-socials {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(245, 166, 35, 0.1);
+  padding: 16px 0;
   text-align: center;
 }
 
 .footer-copy {
-  color: var(--ink-700);
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--copper-dim);
+  letter-spacing: 0.08em;
 }
-
 /* =========================================================
    RESPONSIVE
    ========================================================= */
