@@ -99,5 +99,5 @@ Open `index.html` directly in a browser, or use VS Code's Live Server extension 
 ---
 
 *Developed for the IEEE Web Team Task — IEEE Student Branch, LBSITW · 2026*
-Shreya Ajith
-S5 CSE-3
+|Shreya Ajith|
+|S5 CSE-3|
