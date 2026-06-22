@@ -501,6 +501,9 @@
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.7s var(--ease-out-expo) 1s forwards;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .btn-primary {
@@ -1486,6 +1489,107 @@
         width: 100%;
       }
     }
+
+    /* ─── MODAL ─────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease-out-expo);
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--solder-mask);
+      border: 1px solid rgba(245, 166, 35, 0.3);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      transform: translateY(20px) scale(0.95);
+      transition: transform 0.4s var(--ease-spring);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 166, 35, 0.1) inset;
+    }
+
+    .modal-overlay.open .modal-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--copper-dim);
+      font-size: 1.5rem;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, 0.05);
+      transition: color 0.2s, background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--copper-bright);
+      background: rgba(245, 166, 35, 0.15);
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ivory);
+      margin-bottom: 12px;
+      padding-right: 24px;
+    }
+
+    .modal-body {
+      color: var(--ivory-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--copper);
+      border: 1px solid var(--copper);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: var(--radius-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(245, 166, 35, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(245, 166, 35, 0.15);
+    }
   </style>
 </head>
 <body>
@@ -1677,6 +1781,9 @@
           <a href="#events" class="btn-primary" id="explore-btn">
             Explore Events <span class="btn-arrow">→</span>
           </a>
+          <button class="btn-secondary" id="register-btn">
+            Register Now
+          </button>
         </div>
       </div>
     </div>
@@ -2178,6 +2285,17 @@
 </footer>
 
 
+  <!-- ─── REGISTRATION MODAL ─────────────────────────────────── -->
+  <div class="modal-overlay" id="reg-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <h2 class="modal-title" id="modal-title">Registration Coming Soon</h2>
+      <p class="modal-body">
+        Registration for IEEE Ignite 2026 opens August 1st. Stay tuned!
+      </p>
+    </div>
+  </div>
+
   <!-- ─── JAVASCRIPT ─────────────────────────────────────────── -->
   <script>
     'use strict';
@@ -2347,6 +2465,37 @@
     /* ─── SCHEDULE NODE TOUCH SUPPORT ─────────────────────────── */
     // Note: Touch focus is handled cleanly by CSS :focus-within.
 
+    /* ─── MODAL LOGIC ────────────────────────────────────────── */
+    const regBtn = document.getElementById('register-btn');
+    const regModal = document.getElementById('reg-modal');
+    const modalClose = document.getElementById('modal-close');
+
+    function openModal() {
+      regModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      regModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if (regBtn && regModal && modalClose) {
+      regBtn.addEventListener('click', openModal);
+      modalClose.addEventListener('click', closeModal);
+      
+      regModal.addEventListener('click', (e) => {
+        if (e.target === regModal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && regModal.classList.contains('open')) {
+          closeModal();
+        }
+      });
+    }
 
   </script>
 </body>
